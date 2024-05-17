@@ -10,17 +10,34 @@
 
 // Q2 check if an array is sorted, you can iterate through the array and compare each element with its adjacent element.
 
-const sortedArray = [1, 5, 7, 13, 212];
-const unsortedArray = [1, 5, 7, 3, 12];
-function isArraySorted(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] > arr[i + 1]) {
-      return false;
-    }
-  }
-  return true;
+// const sortedArray = [1, 5, 7, 13, 212];
+// const unsortedArray = [1, 5, 7, 3, 12];
+// function isArraySorted(arr) {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     if (arr[i] > arr[i + 1]) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+
+// console.log(isArraySorted(sortedArray));
+// console.log(isArraySorted(unsortedArray));
+
+
+
+// Q.3 You are given an array of integers. Left rotate the array by one place.
+
+function leftRotateByOne(nums) {
+  if (nums.length <= 1) return nums; 
+  const firstElement = nums.shift();
+  nums.push(firstElement); 
+  return nums;
 }
 
+const nums1 = [1, 2, 3, 4, 5];
+console.log(leftRotateByOne(nums1)); 
 
-console.log(isArraySorted(sortedArray));
-console.log(isArraySorted(unsortedArray));
+const nums2 = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+console.log(leftRotateByOne(nums2)); 
