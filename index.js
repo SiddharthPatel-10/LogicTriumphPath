@@ -29,15 +29,43 @@
 
 // Q.3 You are given an array of integers. Left rotate the array by one place.
 
-function leftRotateByOne(nums) {
-  if (nums.length <= 1) return nums; 
-  const firstElement = nums.shift();
-  nums.push(firstElement); 
-  return nums;
+// function leftRotateByOne(nums) {
+//   if (nums.length <= 1) return nums; 
+//   const firstElement = nums.shift();
+//   nums.push(firstElement); 
+//   return nums;
+// }
+
+// const nums1 = [1, 2, 3, 4, 5];
+// console.log(leftRotateByOne(nums1)); 
+
+// const nums2 = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+// console.log(leftRotateByOne(nums2)); 
+
+
+// Q.4  You are given an array of integers. Left rotate the array by D place.
+
+function reverseArray(arr, start, end){
+  while (start< end) {
+    const temp = arr[start];
+    arr[start] = arr[end];
+    arr[end] = temp;
+    start++;
+    end--;
+  }
 }
 
-const nums1 = [1, 2, 3, 4, 5];
-console.log(leftRotateByOne(nums1)); 
+function leftRotateArray(arr, D){
+  const n = arr.length;
+  D = D % n;
 
-const nums2 = [9, 8, 7, 6, 5, 4, 3, 2, 1];
-console.log(leftRotateByOne(nums2)); 
+  reverseArray(arr, 0, D-1);
+  reverseArray(arr, D, n-1);
+  reverseArray(arr, 0, n-1);
+}
+const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+const D = 2;
+leftRotateArray(arr, D);
+console.log(arr); 
+// time complexity : O(n)
+// space complexity : O(1)
