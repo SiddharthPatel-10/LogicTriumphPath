@@ -45,27 +45,59 @@
 
 // Q.4  You are given an array of integers. Left rotate the array by D place.
 
-function reverseArray(arr, start, end){
-  while (start< end) {
-    const temp = arr[start];
-    arr[start] = arr[end];
-    arr[end] = temp;
-    start++;
-    end--;
-  }
-}
+// function reverseArray(arr, start, end){
+//   while (start< end) {
+//     const temp = arr[start];
+//     arr[start] = arr[end];
+//     arr[end] = temp;
+//     start++;
+//     end--;
+//   }
+// }
 
-function leftRotateArray(arr, D){
-  const n = arr.length;
-  D = D % n;
+// function leftRotateArray(arr, D){
+//   const n = arr.length;
+//   D = D % n;
 
-  reverseArray(arr, 0, D-1);
-  reverseArray(arr, D, n-1);
-  reverseArray(arr, 0, n-1);
-}
-const arr = [1, 2, 3, 4, 5, 6, 7, 8];
-const D = 2;
-leftRotateArray(arr, D);
-console.log(arr); 
+//   reverseArray(arr, 0, D-1);
+//   reverseArray(arr, D, n-1);
+//   reverseArray(arr, 0, n-1);
+// }
+// const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+// const D = 2;
+// leftRotateArray(arr, D);
+// console.log(arr); 
 // time complexity : O(n)
 // space complexity : O(1)
+
+
+// Q.5 move all the zero's at the end of the Array
+function moveZerosToEnd(arr) {
+  let nonZeroElements = [];
+  let zeroCount = 0;
+
+  // Iterate through the array and segregate non-zero elements and count zeros
+  for (let i = 0; i < arr.length; i++) {
+      if (arr[i] !== 0) {
+          nonZeroElements.push(arr[i]);
+      } else {
+          zeroCount++;
+      }
+  }
+
+  // Add the counted zeros to the end of the non-zero elements array
+  while (zeroCount > 0) {
+      nonZeroElements.push(0);
+      zeroCount--;
+  }
+
+  return nonZeroElements;
+}
+
+// Example usage:
+let arr = [0, 1, 0, 3, 12];
+let result = moveZerosToEnd(arr);
+console.log(result); // Output: [1, 3, 12, 0, 0]
+
+//time complexity: O(n)
+//space complexity: O(n)
