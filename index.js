@@ -99,17 +99,60 @@
 
 //Q.6 Linear search on an Array
 
-function linearSearch(arr, n) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] == n) {
-      return i;
-    }
-  }
-  return -1;
-}
+// function linearSearch(arr, n) {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] == n) {
+//       return i;
+//     }
+//   }
+//   return -1;
+// }
 
-let arr = [1, 2, 3, 4, 5, 6, 8];
-n = 6;
-console.log(linearSearch(arr, n));  //Output: 5
+// let arr = [1, 2, 3, 4, 5, 6, 8];
+// n = 6;
+// console.log(linearSearch(arr, n));  //Output: 5
 //time complexity: O(n)
 //space complexity: O(1)
+
+
+// Q.7 Union of two sroted Array
+function unionOfSortedArrays(arr1, arr2) {
+  let result = [];
+  let i = 0;
+  let j = 0;
+
+  while (i < arr1.length && j < arr2.length) {
+      if (arr1[i] < arr2[j]) {
+          result.push(arr1[i]);
+          i++;
+      } else if (arr1[i] > arr2[j]) {
+          result.push(arr2[j]);
+          j++;
+      } else {
+          result.push(arr1[i]);
+          i++;
+          j++;
+      }
+  }
+
+  // Add remaining elements from arr1
+  while (i < arr1.length) {
+      result.push(arr1[i]);
+      i++;
+  }
+
+  // Add remaining elements from arr2
+  while (j < arr2.length) {
+      result.push(arr2[j]);
+      j++;
+  }
+
+  return result;
+}
+
+// Example usage:
+const arr1 = [1, 3, 5, 7, 9, 11, 14, 16];
+const arr2 = [2, 4, 6, 8, 10];
+console.log(unionOfSortedArrays(arr1, arr2));
+//time complexity: O(m + n)
+//space complexity: O(min(m, n))
