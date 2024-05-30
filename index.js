@@ -116,43 +116,80 @@
 
 
 // Q.7 Union of two sroted Array
-function unionOfSortedArrays(arr1, arr2) {
-  let result = [];
-  let i = 0;
-  let j = 0;
+// function unionOfSortedArrays(arr1, arr2) {
+//   let result = [];
+//   let i = 0;
+//   let j = 0;
 
-  while (i < arr1.length && j < arr2.length) {
-      if (arr1[i] < arr2[j]) {
-          result.push(arr1[i]);
-          i++;
-      } else if (arr1[i] > arr2[j]) {
-          result.push(arr2[j]);
-          j++;
-      } else {
-          result.push(arr1[i]);
-          i++;
-          j++;
-      }
-  }
+//   while (i < arr1.length && j < arr2.length) {
+//       if (arr1[i] < arr2[j]) {
+//           result.push(arr1[i]);
+//           i++;
+//       } else if (arr1[i] > arr2[j]) {
+//           result.push(arr2[j]);
+//           j++;
+//       } else {
+//           result.push(arr1[i]);
+//           i++;
+//           j++;
+//       }
+//   }
 
-  // Add remaining elements from arr1
-  while (i < arr1.length) {
-      result.push(arr1[i]);
-      i++;
-  }
+//   // Add remaining elements from arr1
+//   while (i < arr1.length) {
+//       result.push(arr1[i]);
+//       i++;
+//   }
 
-  // Add remaining elements from arr2
-  while (j < arr2.length) {
-      result.push(arr2[j]);
-      j++;
-  }
+//   // Add remaining elements from arr2
+//   while (j < arr2.length) {
+//       result.push(arr2[j]);
+//       j++;
+//   }
 
-  return result;
+//   return result;
+// }
+
+// // Example usage:
+// const arr1 = [1, 3, 5, 7, 9, 11, 14, 16];
+// const arr2 = [2, 4, 6, 8, 10];
+// console.log(unionOfSortedArrays(arr1, arr2));
+//time complexity: O(m + n)
+//space complexity: O(min(m, n))
+
+
+
+// Q.8 Find missing number and repeating number in an array
+function findMissingAndRepeating(arr) {
+    const n = arr.length;
+    let sum = 0, sumOfSquares = 0;
+    let expectedSum = n * (n + 1) / 2;
+    let expectedSumOfSquares = n * (n + 1) * (2 * n + 1) / 6;
+
+    for (let i = 0; i < n; i++) {
+        sum += arr[i];
+        sumOfSquares += arr[i] * arr[i];
+    }
+
+    let diff = expectedSum - sum; // This is missing - repeating
+    let diffSquares = expectedSumOfSquares - sumOfSquares; // This is missing^2 - repeating^2
+
+    // From diffSquares = (missing - repeating) * (missing + repeating)
+    let sumOfMissingAndRepeating = diffSquares / diff;
+
+    let missing = (diff + sumOfMissingAndRepeating) / 2;
+    let repeating = missing - diff;
+
+    return {
+        missing: missing,
+        repeating: repeating
+    };
 }
 
 // Example usage:
-const arr1 = [1, 3, 5, 7, 9, 11, 14, 16];
-const arr2 = [2, 4, 6, 8, 10];
-console.log(unionOfSortedArrays(arr1, arr2));
-//time complexity: O(m + n)
-//space complexity: O(min(m, n))
+const arr = [4, 3, 6, 2, 1, 1];
+const result = findMissingAndRepeating(arr);
+console.log(`Missing number: ${result.missing}`);
+console.log(`Repeating number: ${result.repeating}`);
+//time complexity: O(n)
+//space complexity: O(1)
