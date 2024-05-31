@@ -160,36 +160,73 @@
 
 
 // Q.8 Find missing number and repeating number in an array
-function findMissingAndRepeating(arr) {
-    const n = arr.length;
-    let sum = 0, sumOfSquares = 0;
-    let expectedSum = n * (n + 1) / 2;
-    let expectedSumOfSquares = n * (n + 1) * (2 * n + 1) / 6;
+// function findMissingAndRepeating(arr) {
+//     const n = arr.length;
+//     let sum = 0, sumOfSquares = 0;
+//     let expectedSum = n * (n + 1) / 2;
+//     let expectedSumOfSquares = n * (n + 1) * (2 * n + 1) / 6;
 
-    for (let i = 0; i < n; i++) {
-        sum += arr[i];
-        sumOfSquares += arr[i] * arr[i];
-    }
+//     for (let i = 0; i < n; i++) {
+//         sum += arr[i];
+//         sumOfSquares += arr[i] * arr[i];
+//     }
 
-    let diff = expectedSum - sum; // This is missing - repeating
-    let diffSquares = expectedSumOfSquares - sumOfSquares; // This is missing^2 - repeating^2
+//     let diff = expectedSum - sum; // This is missing - repeating
+//     let diffSquares = expectedSumOfSquares - sumOfSquares; // This is missing^2 - repeating^2
 
-    // From diffSquares = (missing - repeating) * (missing + repeating)
-    let sumOfMissingAndRepeating = diffSquares / diff;
+//     // From diffSquares = (missing - repeating) * (missing + repeating)
+//     let sumOfMissingAndRepeating = diffSquares / diff;
 
-    let missing = (diff + sumOfMissingAndRepeating) / 2;
-    let repeating = missing - diff;
+//     let missing = (diff + sumOfMissingAndRepeating) / 2;
+//     let repeating = missing - diff;
 
-    return {
-        missing: missing,
-        repeating: repeating
-    };
-}
+//     return {
+//         missing: missing,
+//         repeating: repeating
+//     };
+// }
 
-// Example usage:
-const arr = [4, 3, 6, 2, 1, 1];
-const result = findMissingAndRepeating(arr);
-console.log(`Missing number: ${result.missing}`);
-console.log(`Repeating number: ${result.repeating}`);
+// // Example usage:
+// const arr = [4, 3, 6, 2, 1, 1];
+// const result = findMissingAndRepeating(arr);
+// console.log(`Missing number: ${result.missing}`);
+// console.log(`Repeating number: ${result.repeating}`);
 //time complexity: O(n)
 //space complexity: O(1)
+
+
+// Q.9 Longest subarray with sum K 
+function longestSubarrayWithSumK(arr, K) {
+    // Initialize variables
+    let maxLength = 0;
+    let sum = 0;
+    let sumIndexMap = {};
+
+    // Iterate over the array
+    for (let i = 0; i < arr.length; i++) {
+        // Add the current element to the cumulative sum
+        sum += arr[i];
+
+        // Check if current sum is equal to the desired sum K
+        if (sum === K) {
+            maxLength = i + 1;
+        }
+
+        // If this sum has not been seen before, store it with the current index
+        if (sumIndexMap[sum] === undefined) {
+            sumIndexMap[sum] = i;
+        }
+
+        // Check if there is a previous prefix sum that when subtracted from current sum equals K
+        if (sumIndexMap[sum - K] !== undefined) {
+            maxLength = Math.max(maxLength, i - sumIndexMap[sum - K]);
+        }
+    }
+
+    return maxLength;
+}
+
+// Example usage
+const arr = [10, 5, 2, 7, 1, 9];
+const K = 15;
+console.log(longestSubarrayWithSumK(arr, K)); // Output: 4
