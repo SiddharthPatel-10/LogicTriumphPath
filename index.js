@@ -196,37 +196,57 @@
 
 
 // Q.9 Longest subarray with sum K 
-function longestSubarrayWithSumK(arr, K) {
-    // Initialize variables
-    let maxLength = 0;
-    let sum = 0;
-    let sumIndexMap = {};
+// function longestSubarrayWithSumK(arr, K) {
+//     // Initialize variables
+//     let maxLength = 0;
+//     let sum = 0;
+//     let sumIndexMap = {};
 
-    // Iterate over the array
+//     // Iterate over the array
+//     for (let i = 0; i < arr.length; i++) {
+//         // Add the current element to the cumulative sum
+//         sum += arr[i];
+
+//         // Check if current sum is equal to the desired sum K
+//         if (sum === K) {
+//             maxLength = i + 1;
+//         }
+
+//         // If this sum has not been seen before, store it with the current index
+//         if (sumIndexMap[sum] === undefined) {
+//             sumIndexMap[sum] = i;
+//         }
+
+//         // Check if there is a previous prefix sum that when subtracted from current sum equals K
+//         if (sumIndexMap[sum - K] !== undefined) {
+//             maxLength = Math.max(maxLength, i - sumIndexMap[sum - K]);
+//         }
+//     }
+
+//     return maxLength;
+// }
+
+// // Example usage
+// const arr = [10, 5, 2, 7, 1, 9];
+// const K = 15;
+// console.log(longestSubarrayWithSumK(arr, K)); // Output: 4
+
+
+
+
+// Q. 10 Two Sum
+function TwoSum(arr, target){
     for (let i = 0; i < arr.length; i++) {
-        // Add the current element to the cumulative sum
-        sum += arr[i];
-
-        // Check if current sum is equal to the desired sum K
-        if (sum === K) {
-            maxLength = i + 1;
-        }
-
-        // If this sum has not been seen before, store it with the current index
-        if (sumIndexMap[sum] === undefined) {
-            sumIndexMap[sum] = i;
-        }
-
-        // Check if there is a previous prefix sum that when subtracted from current sum equals K
-        if (sumIndexMap[sum - K] !== undefined) {
-            maxLength = Math.max(maxLength, i - sumIndexMap[sum - K]);
-        }
+        for (let j = 1; j < arr.length; j++) {  
+            if(arr[i] + arr[j] == target){
+                return [i, j];
+            }
+        }  
     }
-
-    return maxLength;
+    []
 }
 
-// Example usage
-const arr = [10, 5, 2, 7, 1, 9];
-const K = 15;
-console.log(longestSubarrayWithSumK(arr, K)); // Output: 4
+const arr= [2, 6, 5, 0, 8, 11];
+const target = 14;
+console.log(TwoSum(arr, target));
+// time complexity of O(n)
