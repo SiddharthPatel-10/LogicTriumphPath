@@ -235,18 +235,52 @@
 
 
 // Q. 10 Two Sum
-function TwoSum(arr, target){
-    for (let i = 0; i < arr.length; i++) {
-        for (let j = 1; j < arr.length; j++) {  
-            if(arr[i] + arr[j] == target){
-                return [i, j];
-            }
-        }  
+// function TwoSum(arr, target){
+//     for (let i = 0; i < arr.length; i++) {
+//         for (let j = 1; j < arr.length; j++) {  
+//             if(arr[i] + arr[j] == target){
+//                 return [i, j];
+//             }
+//         }  
+//     }
+//     []
+// }
+
+// const arr= [2, 6, 5, 0, 8, 11];
+// const target = 14;
+// console.log(TwoSum(arr, target));
+// // time complexity of O(n)
+
+
+
+// Q. 11 Second Largest element in an array.
+function findSecondLargest(nums) {
+    if (nums.length < 2) {
+        return null; // There is no second largest element
     }
-    []
+
+    // Initialize the largest and second largest variables
+    let largest = -Infinity;
+    let secondLargest = -Infinity;
+
+    // Iterate through the array
+    for (let num of nums) {
+        if (num > largest) {
+            // Update second largest before largest
+            secondLargest = largest;
+            largest = num;
+        } else if (num > secondLargest && num < largest) {
+            // Update second largest only if it's not equal to the largest
+            secondLargest = num;
+        }
+    }
+
+    // Check if we found a valid second largest element
+    return secondLargest === -Infinity ? null : secondLargest;
 }
 
-const arr= [2, 6, 5, 0, 8, 11];
-const target = 14;
-console.log(TwoSum(arr, target));
-// time complexity of O(n)
+// Example usage:
+const nums = [3, 5, 7, 5, 3, 2, 1];
+console.log(findSecondLargest(nums)); // Output: 5
+//time complexity: O(n)
+//space complexity: O(1)
