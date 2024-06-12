@@ -254,33 +254,58 @@
 
 
 // Q. 11 Second Largest element in an array.
-function findSecondLargest(nums) {
-    if (nums.length < 2) {
-        return null; // There is no second largest element
-    }
+// function findSecondLargest(nums) {
+//     if (nums.length < 2) {
+//         return null; // There is no second largest element
+//     }
 
-    // Initialize the largest and second largest variables
-    let largest = -Infinity;
-    let secondLargest = -Infinity;
+//     // Initialize the largest and second largest variables
+//     let largest = -Infinity;
+//     let secondLargest = -Infinity;
 
-    // Iterate through the array
-    for (let num of nums) {
-        if (num > largest) {
-            // Update second largest before largest
-            secondLargest = largest;
-            largest = num;
-        } else if (num > secondLargest && num < largest) {
-            // Update second largest only if it's not equal to the largest
-            secondLargest = num;
+//     // Iterate through the array
+//     for (let num of nums) {
+//         if (num > largest) {
+//             // Update second largest before largest
+//             secondLargest = largest;
+//             largest = num;
+//         } else if (num > secondLargest && num < largest) {
+//             // Update second largest only if it's not equal to the largest
+//             secondLargest = num;
+//         }
+//     }
+
+//     // Check if we found a valid second largest element
+//     return secondLargest === -Infinity ? null : secondLargest;
+// }
+
+// // Example usage:
+// const nums = [3, 5, 7, 5, 3, 2, 1];
+// console.log(findSecondLargest(nums)); // Output: 5
+// //time complexity: O(n)
+// //space complexity: O(1)
+
+
+// Q. 12 Maximum Consecutive Once
+function maxConsOnce(nums) {
+    let maxi = 0;
+    let count = 0;
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] == 1) {
+            count++;
+            maxi = Math.max(maxi, count);         
+        } else {
+            count = 0;
         }
     }
-
-    // Check if we found a valid second largest element
-    return secondLargest === -Infinity ? null : secondLargest;
+    return maxi;
 }
 
-// Example usage:
-const nums = [3, 5, 7, 5, 3, 2, 1];
-console.log(findSecondLargest(nums)); // Output: 5
-//time complexity: O(n)
-//space complexity: O(1)
+const nums = [1, 1, 0, 1, 1,1, 1, 0, 1, 1];
+console.log(maxConsOnce(nums));
+// //time complexity: O(n)
+// //space complexity: O(1)
+
+
+
+
