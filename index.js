@@ -114,7 +114,6 @@
 //time complexity: O(n)
 //space complexity: O(1)
 
-
 // Q.7 Union of two sroted Array
 // function unionOfSortedArrays(arr1, arr2) {
 //   let result = [];
@@ -157,8 +156,6 @@
 //time complexity: O(m + n)
 //space complexity: O(min(m, n))
 
-
-
 // Q.8 Find missing number and repeating number in an array
 // function findMissingAndRepeating(arr) {
 //     const n = arr.length;
@@ -194,8 +191,7 @@
 //time complexity: O(n)
 //space complexity: O(1)
 
-
-// Q.9 Longest subarray with sum K 
+// Q.9 Longest subarray with sum K
 // function longestSubarrayWithSumK(arr, K) {
 //     // Initialize variables
 //     let maxLength = 0;
@@ -231,17 +227,14 @@
 // const K = 15;
 // console.log(longestSubarrayWithSumK(arr, K)); // Output: 4
 
-
-
-
 // Q. 10 Two Sum
 // function TwoSum(arr, target){
 //     for (let i = 0; i < arr.length; i++) {
-//         for (let j = 1; j < arr.length; j++) {  
+//         for (let j = 1; j < arr.length; j++) {
 //             if(arr[i] + arr[j] == target){
 //                 return [i, j];
 //             }
-//         }  
+//         }
 //     }
 //     []
 // }
@@ -250,8 +243,6 @@
 // const target = 14;
 // console.log(TwoSum(arr, target));
 // // time complexity of O(n)
-
-
 
 // Q. 11 Second Largest element in an array.
 // function findSecondLargest(nums) {
@@ -285,27 +276,56 @@
 // //time complexity: O(n)
 // //space complexity: O(1)
 
+// // Q. 12 Maximum Consecutive Once
+// function maxConsOnce(nums) {
+//     let maxi = 0;
+//     let count = 0;
+//     for (let i = 0; i < nums.length; i++) {
+//         if (nums[i] == 1) {
+//             count++;
+//             maxi = Math.max(maxi, count);
+//         } else {
+//             count = 0;
+//         }
+//     }
+//     return maxi;
+// }
 
-// Q. 12 Maximum Consecutive Once
-function maxConsOnce(nums) {
-    let maxi = 0;
-    let count = 0;
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] == 1) {
-            count++;
-            maxi = Math.max(maxi, count);         
-        } else {
-            count = 0;
-        }
-    }
-    return maxi;
+// const nums = [1, 1, 0, 1, 1,1, 1, 0, 1, 1];
+// console.log(maxConsOnce(nums));
+// // //time complexity: O(n)
+// // //space complexity: O(1)
+
+// Q. 13 You are given a sentence that contains a mix of words and numbers. Your task is to find the largest number in the sentence that does not contain the digit '9'. If there are no such numbers, you should return -1.
+
+function containsNine(number) {
+  return number.includes("9");
 }
 
-const nums = [1, 1, 0, 1, 1,1, 1, 0, 1, 1];
-console.log(maxConsOnce(nums));
-// //time complexity: O(n)
-// //space complexity: O(1)
+function isNumber(str) {
+  return !isNaN(str);
+}
 
+function extractLargestNumberWithoutNine(sentence) {
+  const components = sentence.split(" ");
+  let maxNumber = null;
 
+  for (let i = 0; i < components.length; i++) {
+    if (isNumber(components[i])) {
+      const num = components[i];
+      if (!containsNine(num)) {
+        if (maxNumber === null || BigInt(num) > BigInt(maxNumber)) {
+          maxNumber = num;
+        }
+      }
+    }
+  }
 
+  return maxNumber !== null ? maxNumber : -1;
+}
 
+// Example usage:
+const sentence1 = "This is alpha 5057 and 97";
+const sentence2 = "Another input 9007";
+console.log(extractLargestNumberWithoutNine(sentence1)); // Output: 5057
+console.log(extractLargestNumberWithoutNine(sentence2)); // Output: -1
