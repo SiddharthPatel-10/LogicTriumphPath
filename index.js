@@ -296,36 +296,80 @@
 // // //time complexity: O(n)
 // // //space complexity: O(1)
 
-// Q. 13 You are given a sentence that contains a mix of words and numbers. Your task is to find the largest number in the sentence that does not contain the digit '9'. If there are no such numbers, you should return -1.
+// // Q. 13 You are given a sentence that contains a mix of words and numbers. Your task is to find the largest number in the sentence that does not contain the digit '9'. If there are no such numbers, you should return -1.
 
-function containsNine(number) {
-  return number.includes("9");
-}
+// function containsNine(number) {
+//   return number.includes("9");
+// }
 
-function isNumber(str) {
-  return !isNaN(str);
-}
+// function isNumber(str) {
+//   return !isNaN(str);
+// }
 
-function extractLargestNumberWithoutNine(sentence) {
-  const components = sentence.split(" ");
-  let maxNumber = null;
+// function extractLargestNumberWithoutNine(sentence) {
+//   const components = sentence.split(" ");
+//   let maxNumber = null;
 
-  for (let i = 0; i < components.length; i++) {
-    if (isNumber(components[i])) {
-      const num = components[i];
-      if (!containsNine(num)) {
-        if (maxNumber === null || BigInt(num) > BigInt(maxNumber)) {
-          maxNumber = num;
-        }
+//   for (let i = 0; i < components.length; i++) {
+//     if (isNumber(components[i])) {
+//       const num = components[i];
+//       if (!containsNine(num)) {
+//         if (maxNumber === null || BigInt(num) > BigInt(maxNumber)) {
+//           maxNumber = num;
+//         }
+//       }
+//     }
+//   }
+
+//   return maxNumber !== null ? maxNumber : -1;
+// }
+
+// // Example usage:
+// const sentence1 = "This is alpha 5057 and 97";
+// const sentence2 = "Another input 9007";
+// console.log(extractLargestNumberWithoutNine(sentence1)); // Output: 5057
+// console.log(extractLargestNumberWithoutNine(sentence2)); // Output: -1
+
+
+
+// Q. 14 Given a string str, the task is to find the bracket numbers, i.e., for each bracket in str, return i if the bracket is the ith opening or closing bracket to appear in the string. 
+
+function printBracketNumbers(str) {
+  // Initialize a counter for the bracket numbers
+  let counter = 0;
+  
+  // Initialize a stack to keep track of the brackets
+  let stack = [];
+  
+  // Initialize an array to store the result
+  let result = [];
+
+  // Iterate through each character in the string
+  for (let i = 0; i < str.length; i++) {
+      // If the character is an opening bracket
+      if (str[i] === '(') {
+          // Increment the counter
+          counter++;
+          console.log(counter);
+          // Push the counter value onto the stack
+          stack.push(counter);
+          // Add the counter value to the result array
+          result.push(counter);
+
+
+      } else if (str[i] === ')') {
+          // Pop the top value from the stack
+          let top = stack.pop();
+          // Add the popped value to the result array
+          result.push(top);
+
       }
-    }
   }
 
-  return maxNumber !== null ? maxNumber : -1;
+  // Return the result array
+  return result;
 }
 
 // Example usage:
-const sentence1 = "This is alpha 5057 and 97";
-const sentence2 = "Another input 9007";
-console.log(extractLargestNumberWithoutNine(sentence1)); // Output: 5057
-console.log(extractLargestNumberWithoutNine(sentence2)); // Output: -1
+const inputStr = "(aa(bdc))p(dee)";
+console.log(printBracketNumbers(inputStr));  // Expected output: [1, 2, 2, 1, 3, 3]
