@@ -332,44 +332,71 @@
 
 
 
-// Q. 14 Given a string str, the task is to find the bracket numbers, i.e., for each bracket in str, return i if the bracket is the ith opening or closing bracket to appear in the string. 
+// // Q. 14 Given a string str, the task is to find the bracket numbers, i.e., for each bracket in str, return i if the bracket is the ith opening or closing bracket to appear in the string. 
 
-function printBracketNumbers(str) {
-  // Initialize a counter for the bracket numbers
-  let counter = 0;
+// function printBracketNumbers(str) {
+//   // Initialize a counter for the bracket numbers
+//   let counter = 0;
   
-  // Initialize a stack to keep track of the brackets
-  let stack = [];
+//   // Initialize a stack to keep track of the brackets
+//   let stack = [];
   
-  // Initialize an array to store the result
-  let result = [];
+//   // Initialize an array to store the result
+//   let result = [];
 
-  // Iterate through each character in the string
-  for (let i = 0; i < str.length; i++) {
-      // If the character is an opening bracket
-      if (str[i] === '(') {
-          // Increment the counter
-          counter++;
-          console.log(counter);
-          // Push the counter value onto the stack
-          stack.push(counter);
-          // Add the counter value to the result array
-          result.push(counter);
+//   // Iterate through each character in the string
+//   for (let i = 0; i < str.length; i++) {
+//       // If the character is an opening bracket
+//       if (str[i] === '(') {
+//           // Increment the counter
+//           counter++;
+//           console.log(counter);
+//           // Push the counter value onto the stack
+//           stack.push(counter);
+//           // Add the counter value to the result array
+//           result.push(counter);
 
 
-      } else if (str[i] === ')') {
-          // Pop the top value from the stack
-          let top = stack.pop();
-          // Add the popped value to the result array
-          result.push(top);
+//       } else if (str[i] === ')') {
+//           // Pop the top value from the stack
+//           let top = stack.pop();
+//           // Add the popped value to the result array
+//           result.push(top);
 
-      }
-  }
+//       }
+//   }
 
-  // Return the result array
-  return result;
+//   // Return the result array
+//   return result;
+// }
+
+// // Example usage:
+// const inputStr = "(aa(bdc))p(dee)";
+// console.log(printBracketNumbers(inputStr));  // Expected output: [1, 2, 2, 1, 3, 3]
+
+
+
+// Q. 15 Given the constraints and the requirement for O(1) time complexity and O(1) auxiliary space, we need to ensure that we compute the number of cells with the value q in constant time without iterating through potential values.
+
+function countCellsWithValue(n, q) {
+    let start = Math.max(1, q - n);
+    let end = Math.min(n, q - 1);
+
+    if (start > end) {
+        return 0;
+    }
+
+    return end - start + 1;
 }
 
-// Example usage:
-const inputStr = "(aa(bdc))p(dee)";
-console.log(printBracketNumbers(inputStr));  // Expected output: [1, 2, 2, 1, 3, 3]
+// Example inputs
+let n = 4;
+let q = 7;
+
+// Print the result for the example inputs
+console.log(countCellsWithValue(n, q)); // Output: 2
+
+// Another example
+n = 5;
+q = 4;
+console.log(countCellsWithValue(n, q)); // Output: 3
