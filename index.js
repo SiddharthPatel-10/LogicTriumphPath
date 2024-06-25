@@ -378,25 +378,64 @@
 
 // Q. 15 Given the constraints and the requirement for O(1) time complexity and O(1) auxiliary space, we need to ensure that we compute the number of cells with the value q in constant time without iterating through potential values.
 
-function countCellsWithValue(n, q) {
-    let start = Math.max(1, q - n);
-    let end = Math.min(n, q - 1);
+// function countCellsWithValue(n, q) {
+//     let start = Math.max(1, q - n);
+//     let end = Math.min(n, q - 1);
 
-    if (start > end) {
-        return 0;
+//     if (start > end) {
+//         return 0;
+//     }
+
+//     return end - start + 1;
+// }
+
+// // Example inputs
+// let n = 4;
+// let q = 7;
+
+// // Print the result for the example inputs
+// console.log(countCellsWithValue(n, q)); // Output: 2
+
+// // Another example
+// n = 5;
+// q = 4;
+// console.log(countCellsWithValue(n, q)); // Output: 3
+
+
+// Q. 16  You are given an integer k and matrix mat. Rotate the elements of the given matrix to the left k times and return the resulting matrix.
+function leftRotateMatrix(mat, k) {
+    const numRows = mat.length;
+    const numCols = mat[0].length;
+    const rotations = k % numCols; // Reduce k to be within the number of columns
+    
+    const rotatedMat = [];
+    
+    for (let i = 0; i < numRows; i++) {
+        const newRow = [];
+        for (let j = 0; j < numCols; j++) {
+            newRow.push(mat[i][(j + rotations) % numCols]);
+        }
+        rotatedMat.push(newRow);
     }
-
-    return end - start + 1;
+    
+    return rotatedMat;
 }
 
-// Example inputs
-let n = 4;
-let q = 7;
+// Test cases
+const k1 = 1;
+const mat1 = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+console.log(leftRotateMatrix(mat1, k1));
+// Output: [[2, 3, 1], [5, 6, 4], [8, 9, 7]]
 
-// Print the result for the example inputs
-console.log(countCellsWithValue(n, q)); // Output: 2
-
-// Another example
-n = 5;
-q = 4;
-console.log(countCellsWithValue(n, q)); // Output: 3
+const k2 = 2;
+const mat2 = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+console.log(leftRotateMatrix(mat2, k2));
+// Output: [[3, 1, 2], [6, 4, 5], [9, 7, 8]]
